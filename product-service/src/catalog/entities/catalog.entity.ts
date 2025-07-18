@@ -10,7 +10,7 @@ export class Catalog {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column({ unique: true })
     name: string;
 
     @Column({
@@ -19,13 +19,16 @@ export class Catalog {
     })
     category: Category;
 
-    @Column()
+    @Column({ type: 'float' })
     price: number;
 
     @Column({default: true})
     isExist: boolean;
 
-    @Column()
+    @Column({
+        default: 0,
+        type: 'float',
+    })
     score: number;
 
     @Column()

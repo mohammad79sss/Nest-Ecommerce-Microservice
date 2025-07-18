@@ -94,20 +94,22 @@ export class ProfileService {
     }
   }
 
-
   async findByEmail(email: string) {
-    try {
-      const profile = await this.profileRepository.findOne({ where: { email } });
-      if (!profile) {
-        throw new NotFoundException();
-      }
-      return {
-        message: 'success',
-        data: profile,
-      };
-    } catch (e) {
-      throw new InternalServerErrorException(e);
-    }
+    const profile = await this.profileRepository.findOne({ where: { email } });
+    if (!profile) throw new NotFoundException('Email not found');
+    return {
+      message: 'success',
+      data: profile,
+    };
+  }
+
+  async findByPhone(phone: string) {
+    const profile = await this.profileRepository.findOne({ where: { phone } });
+    if (!profile) throw new NotFoundException('Phone not found');
+    return {
+      message: 'success',
+      data: profile,
+    };
   }
 
 }

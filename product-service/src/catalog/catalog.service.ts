@@ -12,13 +12,16 @@ export class CatalogService {
 
 
   async create(createCatalogDto: CreateCatalogDto) {
+    console.log("catalog service",createCatalogDto);
     try {
       const catalog = await this.catalogRepository.save(createCatalogDto);
+
       return {
         message: 'success',
         data: catalog,
       };
     } catch (err){
+      console.error('Error saving catalog:', err);
       throw new InternalServerErrorException(err);
     }
   }

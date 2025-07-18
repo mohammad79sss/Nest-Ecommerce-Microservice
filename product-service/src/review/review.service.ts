@@ -22,6 +22,7 @@ export class ReviewService {
         data: review,
       };
     } catch (err){
+      console.log(err);
       throw new InternalServerErrorException(err);
     }
   }
@@ -64,7 +65,7 @@ export class ReviewService {
     }
   }
 
-  async update(id: number, updateReviewDto: UpdateReviewDto) {
+  async update(id: string, updateReviewDto: UpdateReviewDto) {
     try {
       const result = await this.reviewRepository.update(id, updateReviewDto);
       if (!result) {
@@ -105,6 +106,7 @@ export class ReviewService {
     page?: number;
     limit?: number;
   }) {
+    console.log("log from service");
     try {
       const [data, total] = await this.reviewRepository.findAndCount({
         where: { productId },
@@ -138,6 +140,7 @@ export class ReviewService {
     page?: number;
     limit?: number;
   }) {
+    console.log("log from service");
     try {
       const [data, total] = await this.reviewRepository.findAndCount({
         where: { userId },

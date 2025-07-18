@@ -14,7 +14,7 @@ export class Review {
     @Column()
     content : string;
 
-    @Column()
+    @Column({type: 'float'})
     score : number;
 
     @Column()

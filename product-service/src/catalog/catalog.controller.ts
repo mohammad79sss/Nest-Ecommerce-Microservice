@@ -11,12 +11,13 @@ export class CatalogController {
 
   @MessagePattern('createCatalog')
   create(@Payload() createCatalogDto: CreateCatalogDto) {
+    console.log("catalog controller",createCatalogDto);
     return this.catalogService.create(createCatalogDto);
   }
 
   @MessagePattern('findAllCatalog')
   findAll(@Payload() payload: { page?: number; limit?: number }) {
-    return this.catalogService.findAll();
+    return this.catalogService.findAll(payload);
   }
 
   @MessagePattern('findOneCatalog')

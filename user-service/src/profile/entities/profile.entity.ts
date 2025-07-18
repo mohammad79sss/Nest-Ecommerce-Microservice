@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 export enum Role{
     ADMIN = "ADMIN",
@@ -13,21 +13,25 @@ export class Profile {
     @Column()
     username: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column()
+    password: string;
+
+    @Column({ unique: true })
     phone: string;
 
     @Column()
     address: string;
 
-    @Column(
-        {
-            type: 'enum',
-            enum: Role,
-        }
-    )
-    role: Role
+    @Column({
+        type: 'enum',
+        enum: Role,
+    })
+    role: Role;
 
+    @CreateDateColumn()
+    createdAt: Date;
 }
+

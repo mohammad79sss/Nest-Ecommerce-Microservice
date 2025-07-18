@@ -133,6 +133,7 @@ export class GatewayController {
 
   @Post('catalog')
   createCatalog(@Body() createCatalogDto: any) {
+    console.log("gateway controller",createCatalogDto);
     return this.productClient.send('createCatalog', createCatalogDto);
   }
 
@@ -189,15 +190,32 @@ export class GatewayController {
     return this.productClient.send('removeReview', id);
   }
 
-  @Get('review/:productId')
-  findAllReviewByProductId(@Param('productId') productId: string) {
-    return this.productClient.send('findAllReviewByProductId', productId);
+  @Get('review/product/:productId')
+  findAllReviewByProductId(
+      @Param('productId') productId: string,
+      @Query('page') page = 1,
+      @Query('limit') limit = 10
+  ) {
+    return this.productClient.send('findAllReviewByProductId', {
+      productId,
+      page: Number(page),
+      limit: Number(limit),
+    });
   }
 
-  @Get('review/:userId')
-  findAllByUserId(@Param('userId') userId: string) {
-    return this.productClient.send('findAllReviewByUserId', userId);
+  @Get('review/user/:userId')
+  findAllByUserId(
+      @Param('userId') userId: string,
+      @Query('page') page = 1,
+      @Query('limit') limit = 10
+  ) {
+    return this.productClient.send('findAllReviewByUserId', {
+      userId,
+      page: Number(page),
+      limit: Number(limit),
+    });
   }
+
 
 
   // User endpoints==================================================================================================

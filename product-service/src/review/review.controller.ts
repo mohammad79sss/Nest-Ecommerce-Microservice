@@ -37,6 +37,7 @@ export class ReviewController {
   findAllByProductId(
       @Payload() payload: { productId: string; page?: number; limit?: number }
   ) {
+    console.log("log from controller");
     return this.reviewService.findAllByProductId(payload);
   }
 
@@ -44,6 +45,7 @@ export class ReviewController {
   findAllByUserId(
       @Payload() payload: { userId: string; page?: number; limit?: number }
   ) {
+    console.log("log from controller");
     return this.reviewService.findAllByUserId(payload);
   }
 
